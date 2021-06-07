@@ -25,13 +25,13 @@ RUN go get github.com/mailhog/MailHog && \
     ln $GOPATH/bin/mhsendmail /usr/sbin/sendmail && \
     ln $GOPATH/bin/mhsendmail /usr/bin/mail &&\
     ### Apache ###
+    apt-get update && \
     apt-get -y install apache2 && \
     chown -R gitpod:gitpod /var/run/apache2 /var/lock/apache2 /var/log/apache2 && \
     echo "include ${HOME}/gitpod-wordpress/conf/apache.conf" > /etc/apache2/apache2.conf && \
     echo ". ${HOME}/gitpod-wordpress/conf/apache.env.sh" > /etc/apache2/envvars && \
     ### PHP ###
     add-apt-repository ppa:ondrej/php && \
-    apt-get update && \
     apt-get -qy install \
         libapache2-mod-php \
         php${PHP_VERSION} \
